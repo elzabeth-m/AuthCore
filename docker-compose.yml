@@ -1,0 +1,28 @@
+
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}   # Use .env variable
+      MYSQL_DATABASE: ${MYSQL_DATABASE}               # Use .env variable
+    ports:
+      - "3306:3306"                                   # Expose MySQL port
+    networks:
+      - my-network                                     # Use the custom network
+
+  authcore-app:
+    build: .                                         # Build from the current directory (where Dockerfile is)
+    ports:
+      - "8080:8080"                                   # Expose Spring Boot application port
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}          # Use .env variable
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}  # Use .env variable
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}  # Use .env variable
+    networks:
+      - my-network                                     # Use the custom network
+
+networks:
+  my-network:                                       # Define the custom network
+    external: true                                   # Use the already created external network
