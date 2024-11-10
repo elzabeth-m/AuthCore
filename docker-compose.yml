@@ -12,10 +12,11 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+       test: ["CMD-SHELL", "mysqladmin ping || exit 1"]
+       interval: 10s
+       timeout: 5s
+       retries: 5
+
 
   springapp:
     build:
