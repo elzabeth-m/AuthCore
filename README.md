@@ -26,6 +26,9 @@ Hosting:Render
 Setup  
 
 git clone https://github.com/elzabeth-m/authcore.git
+
 cd authcore
+
 mvn clean install
+
 mvn spring-boot:run
