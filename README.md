@@ -4,8 +4,10 @@ AuthCore is a backend authentication system built with  Spring Boot and Java.
 
 API Documentation  
 
-Swagger UI – Explore API endpoints  
-OpenAPI JSON – API specification 
+Swagger UI
+(https://authcore.onrender.com/swagger-ui/index.html) – Explore API endpoints  
+
+OpenAPI JSON (https://authcore.onrender.com/v3/api-docs) – API specification 
 
 Features
 
@@ -15,6 +17,7 @@ Token-based authentication (JWT)
 CORS support for frontend integration  
 
 Tech Stack  
+
 Backend: Java, Spring Boot
 Database:MySQL (hosted on Railway)  
 Security:Spring Security, JWT  
