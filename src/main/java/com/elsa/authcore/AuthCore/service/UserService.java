@@ -191,7 +191,8 @@ public class UserService implements UserDetailsService{
 
 	public void verifyUser(VerificationDto input) {
 	Optional<User> optionalUser = userRepository.findByVerificationToken(input.getVerificationToken());
-		User user=optionalUser.get();
+		User user=optionalUser.orElseThrow(() -> new UserNotFoundException("User not found with the provided verification token."));
+	    
 		if(user.getTokenExpiryDate().isBefore(LocalDateTime.now())) {
 			throw new TokenExpiredException("Verification token has expired.");
 		}

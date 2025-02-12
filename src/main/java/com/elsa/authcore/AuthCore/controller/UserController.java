@@ -119,11 +119,18 @@ public class UserController {
             verificationDto.setVerificationToken(token);
             userService.verifyUser(verificationDto);
             return ResponseEntity.ok(new ResponseWrapper<>(true, "Account verified successfully.", null));
-        } catch (TokenExpiredException | InvalidTokenException e) {
+        } catch (TokenExpiredException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ResponseWrapper<>(false, null, e.getMessage()));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ResponseWrapper<>(false, null, "User not found with the provided verification token."));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseWrapper<>(false, null, "An unexpected error occurred."));
         }
     }
+
 
     @PostMapping("/refresh-token")
     public ResponseEntity<ResponseWrapper<AuthResponse>> refreshToken(@RequestHeader("Authorization") String token) {
