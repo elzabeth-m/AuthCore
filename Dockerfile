@@ -10,10 +10,13 @@ WORKDIR /app
 # Copy the source code into the container
 COPY . .
 
-# Build the .jar file using Maven
+# Build the .jar file using Maven (this should create the target directory)
 RUN mvn clean package -DskipTests
 
-# Copy the .jar file into the container
+# Ensure that the .jar file exists in target directory
+RUN ls -alh target/
+
+# Copy the .jar file from the target folder into the container
 COPY target/*.jar app.jar
 
 # Expose the application's port
