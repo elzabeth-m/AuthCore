@@ -24,6 +24,9 @@ Access Swagger UI:
 ## Run Locally
 
 git clone https://github.com/elzabeth-m/AuthCore.git
+
 cd AuthCore
+
 mvn clean package
+
 java -jar target/AuthCore.jar
